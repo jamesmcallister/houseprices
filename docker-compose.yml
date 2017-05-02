@@ -1,0 +1,9 @@
+influxdb:
+  image: influxdb:latest
+  container_name: influxdb
+  ports:
+    - "8083:8083"
+    - "8086:8086"
+    - "8090:8090"
+  volumes:
+    -  ./influx:/var/lib/influxdb

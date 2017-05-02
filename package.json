@@ -1,0 +1,14 @@
+{
+  "name": "houseprices",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "shell": "docker exec -ti influxdb",
+    "start": "docker-compose up --build --remove-orphans",
+    "start:d": "docker-compose up --build -d -- remove-orphans",
+    "stop": "docker-compose stop"
+  },
+  "author": "",
+  "license": "UNLINCED"
+}
