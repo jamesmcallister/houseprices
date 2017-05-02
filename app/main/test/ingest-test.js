@@ -2,10 +2,9 @@ import ingest from "../src/ingest"
 const Influx = require('influx');
 describe('Ingest', function () {
 
-
     let testRowFound = () => {
         const influx = new Influx.InfluxDB({
-            host: 'localhost',
+            host: process.env.INFLUXDB_HOST,
             database: 'houseprices',
             schema: [
                 {

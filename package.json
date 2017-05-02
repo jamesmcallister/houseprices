@@ -9,14 +9,15 @@
     ]
   },
   "scripts": {
-    "shell": "docker exec -ti influxdb",
+    "clean": "rimraf app/target",
+    "shell": "docker exec -ti influxdb bash",
     "start": "docker-compose up --build --remove-orphans",
     "start:d": "docker-compose up --build -d -- remove-orphans",
     "stop": "docker-compose stop",
-    "compile": "babel ./app/main/src --out-dir ./app/target/src",
-    "test-compile" : "babel ./app/main/test --out-dir ./app/target/test",
+    "compile": "npm run clean && babel ./app/main/src --out-dir ./app/target/src",
+    "test-compile": "babel ./app/main/test --out-dir ./app/target/test",
     "ingest": "npm run compile && node ./app/target/src/ingest.js",
-    "test": "npm run compile && npm run test-compile && mocha ./app/target/test"
+    "test": "export INFLUXDB_HOST=\"$(docker inspect --format '{{ .NetworkSettings.IPAddress }}' influxdb)\" && npm run compile && npm run test-compile && mocha ./app/target/test"
   },
   "author": "",
   "license": "UNLINCED",
@@ -25,6 +26,7 @@
     "babel-preset-es2015": "6.24.1",
     "babel-register": "6.24.1",
     "influx": "5.0.7",
-    "mocha": "3.3.0"
+    "mocha": "3.3.0",
+    "rimraf": "2.6.1"
   }
 }
