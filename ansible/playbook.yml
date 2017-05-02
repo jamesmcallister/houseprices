@@ -1,0 +1,32 @@
+---
+- hosts: 178.62.34.139,
+  remote_user: root
+  tasks:
+    - name: install apt-transport-https, ca-certificates, curl, gnupg2, software-properties-common, python-dev, python-pip
+      apt:
+        name: "{{ item }}"
+        update_cache: no
+      with_items:
+        - apt-transport-https
+        - ca-certificates
+        - curl
+        - gnupg2
+        - software-properties-common
+        - python-dev
+        - python-pip
+    - name: add docker apt key
+      shell: |
+        curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
+    - name: add docker repo
+      shell: |
+        add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable"
+    - name: install docker-ce
+      apt:
+        name: docker-ce
+        update_cache: yes
+
+    - pip:
+        name: docker-compose
+    - docker_service:
+        project_src: ..
+        state: absent
