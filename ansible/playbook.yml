@@ -1,8 +1,8 @@
 ---
-- hosts: 178.62.34.139,
+- hosts: localhost,
   remote_user: root
   tasks:
-    - name: install apt-transport-https, ca-certificates, curl, gnupg2, software-properties-common, python-dev, python-pip
+    - name: install apt-transport-https, ca-certificates, curl, gnupg2, software-properties-common, python-dev
       apt:
         name: "{{ item }}"
         update_cache: no
@@ -13,7 +13,10 @@
         - gnupg2
         - software-properties-common
         - python-dev
-        - python-pip
+    - easy_install:
+        name: pip
+        state: latest
+
     - name: add docker apt key
       shell: |
         curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
@@ -27,6 +30,12 @@
 
     - pip:
         name: docker-compose
+    - file:
+        path: /var/houseprices
+        state: directory
+    - copy:
+        src: ../docker-compose.yml
+        dest: /var/houseprices/docker-compose.yml
     - docker_service:
-        project_src: ..
+        project_src: /var/houseprices
         state: absent

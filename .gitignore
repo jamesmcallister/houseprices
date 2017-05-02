@@ -38,3 +38,9 @@ jspm_packages
 
 # csv location
 data
+
+.idea
+*.iml
+target
+*.retry
+influx
