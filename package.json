@@ -14,6 +14,7 @@
     "start": "docker-compose up --build --remove-orphans",
     "start:d": "docker-compose up --build -d -- remove-orphans",
     "stop": "docker-compose stop",
+    "deploy": "ansible-playbook ./ansible/playbook.yml -i do-droplet-house-prices,",
     "compile": "npm run clean && babel ./app/main/src --out-dir ./app/target/src",
     "test-compile": "babel ./app/main/test --out-dir ./app/target/test",
     "ingest": "npm run compile && node ./app/target/src/ingest.js",
