@@ -1,5 +1,5 @@
 ---
-- hosts: localhost,
+- hosts: do-droplet-house-prices,
   remote_user: root
   tasks:
     - name: install apt-transport-https, ca-certificates, curl, gnupg2, software-properties-common, python-dev
@@ -38,4 +38,4 @@
         dest: /var/houseprices/docker-compose.yml
     - docker_service:
         project_src: /var/houseprices
-        state: absent
+        state: present
