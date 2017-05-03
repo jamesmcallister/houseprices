@@ -18,7 +18,8 @@
     "compile": "npm run clean && babel ./app/main/src --out-dir ./app/target/src",
     "test-compile": "babel ./app/main/test --out-dir ./app/target/test",
     "ingest": "npm run compile && node ./app/target/src/ingest.js",
-    "test": "export INFLUXDB_HOST=\"$(docker inspect --format '{{ .NetworkSettings.IPAddress }}' influxdb)\" && npm run compile && npm run test-compile && mocha ./app/target/test"
+    "test": "export INFLUXDB_HOST=\"$(docker inspect --format '{{ .NetworkSettings.IPAddress }}' influxdb)\" && npm run compile && npm run test-compile && mocha ./app/target/test",
+    "influxtest": "npm run compile && node ./app/target/src/influxtest.js"
   },
   "author": "",
   "license": "UNLINCED",
