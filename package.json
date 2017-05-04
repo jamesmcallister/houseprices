@@ -12,7 +12,7 @@
     "clean": "rimraf app/target",
     "shell": "docker exec -ti influxdb bash",
     "start": "docker-compose up --build --remove-orphans",
-    "start:d": "docker-compose up --build -d -- remove-orphans",
+    "start:d": "docker-compose up --build -d --remove-orphans",
     "stop": "docker-compose stop",
     "deploy": "ansible-playbook ./ansible/playbook.yml -i do-droplet-house-prices,",
     "compile": "npm run clean && babel ./app/main/src --out-dir ./app/target/src",
