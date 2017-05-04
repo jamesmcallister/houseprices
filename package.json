@@ -17,9 +17,11 @@
     "deploy": "ansible-playbook ./ansible/playbook.yml -i do-droplet-house-prices,",
     "compile": "npm run clean && babel ./app/main/src --out-dir ./app/target/src",
     "test-compile": "babel ./app/main/test --out-dir ./app/target/test",
+    "int-compile": "babel ./app/main/integration --out-dir ./app/target/integration",
     "ingest": "npm run compile && node ./app/target/src/ingest.js",
     "test": "export INFLUXDB_HOST=\"$(docker inspect --format '{{ .NetworkSettings.IPAddress }}' influxdb)\" && npm run compile && npm run test-compile && mocha ./app/target/test",
-    "influxtest": "npm run compile && node ./app/target/src/influxtest.js"
+    "int": "export INFLUXDB_HOST=\"$(docker inspect --format '{{ .NetworkSettings.IPAddress }}' influxdb)\" && npm run compile && npm run int-compile && mocha ./app/target/integration",
+    "influxtest": "export INFLUXDB_HOST=\"$(docker inspect --format '{{ .NetworkSettings.IPAddress }}' influxdb)\" && npm run compile && node ./app/target/src/influxtest.js"
   },
   "author": "",
   "license": "UNLINCED",
@@ -27,8 +29,10 @@
     "babel-cli": "6.24.1",
     "babel-preset-es2015": "6.24.1",
     "babel-register": "6.24.1",
+    "chai": "3.5.0",
     "influx": "5.0.7",
     "mocha": "3.3.0",
-    "rimraf": "2.6.1"
+    "rimraf": "2.6.1",
+    "sinon": "2.2.0"
   }
 }
