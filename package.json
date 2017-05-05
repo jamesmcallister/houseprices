@@ -22,7 +22,7 @@
     "test": "export INFLUXDB_HOST=\"$(docker inspect --format '{{ .NetworkSettings.IPAddress }}' influxdb)\" && npm run compile && npm run test-compile && mocha ./app/target/test",
     "int": "export INFLUXDB_HOST=\"$(docker inspect --format '{{ .NetworkSettings.IPAddress }}' influxdb)\" && npm run compile && npm run int-compile && mocha ./app/target/integration",
     "influxtest": "export INFLUXDB_HOST=\"$(docker inspect --format '{{ .NetworkSettings.IPAddress }}' influxdb)\" && npm run compile && node ./app/target/src/influxtest.js",
-    "test:james": "mocha --colors --compilers js:babel-register ./app/main/test/**/*",
+    "test:james": "export INFLUXDB_HOST=\"$(docker inspect --format '{{ .NetworkSettings.IPAddress }}' influxdb)\" && mocha --colors --compilers js:babel-register ./app/main/test/**/*",
     "test:watch": "watch-run -i -p './app/main/**/*' npm run test:james"
   },
   "author": "",
@@ -32,6 +32,8 @@
     "babel-preset-es2015": "6.24.1",
     "babel-register": "6.24.1",
     "chai": "3.5.0",
+    "eslint": "3.19.0",
+    "eslint-plugin-prettier": "2.0.1",
     "influx": "5.0.7",
     "mocha": "3.3.0",
     "rimraf": "2.6.1",
