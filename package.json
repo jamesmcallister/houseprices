@@ -21,7 +21,9 @@
     "ingest": "npm run compile && node ./app/target/src/ingest.js",
     "test": "export INFLUXDB_HOST=\"$(docker inspect --format '{{ .NetworkSettings.IPAddress }}' influxdb)\" && npm run compile && npm run test-compile && mocha ./app/target/test",
     "int": "export INFLUXDB_HOST=\"$(docker inspect --format '{{ .NetworkSettings.IPAddress }}' influxdb)\" && npm run compile && npm run int-compile && mocha ./app/target/integration",
-    "influxtest": "export INFLUXDB_HOST=\"$(docker inspect --format '{{ .NetworkSettings.IPAddress }}' influxdb)\" && npm run compile && node ./app/target/src/influxtest.js"
+    "influxtest": "export INFLUXDB_HOST=\"$(docker inspect --format '{{ .NetworkSettings.IPAddress }}' influxdb)\" && npm run compile && node ./app/target/src/influxtest.js",
+    "test:james": "mocha --colors --compilers js:babel-register ./app/main/test/**/*",
+    "test:watch": "watch-run -i -p './app/main/**/*' npm run test:james"
   },
   "author": "",
   "license": "UNLINCED",
@@ -33,6 +35,7 @@
     "influx": "5.0.7",
     "mocha": "3.3.0",
     "rimraf": "2.6.1",
-    "sinon": "2.2.0"
+    "sinon": "2.2.0",
+    "watch-run": "1.2.5"
   }
 }
