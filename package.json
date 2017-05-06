@@ -9,6 +9,7 @@
     ]
   },
   "scripts": {
+    "yarn": "yarn",
     "clean": "rimraf app/target",
     "shell": "docker exec -ti influxdb bash",
     "start": "docker-compose up --build --remove-orphans",
@@ -38,6 +39,7 @@
     "mocha": "3.3.0",
     "rimraf": "2.6.1",
     "sinon": "2.2.0",
-    "watch-run": "1.2.5"
+    "watch-run": "1.2.5",
+    "yarn": "0.23.4"
   }
 }

@@ -1,10 +1,10 @@
 //when refactored, influx should not be imported directly!
 
 import { escape } from 'influx'
-import influxClient from './influxClient'
+import influxClient from './influx/influxClientBuilder'
 import config from './config'
-import promiseDatabase from './promiseDatabase'
-import promiseDeleteDatabase from './promiseDeleteDatabase'
+import promiseDatabase from './influx/promiseDatabaseBuilder'
+import promiseDeleteDatabase from './influx/promiseDeleteDatabaseBuilder'
 
 const promiseWriteData = () =>
   influxClient().writePoints([

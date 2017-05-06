@@ -1,6 +1,4 @@
-import promiseDatabaseNames from "../src/promiseDatabaseNames";
-import promiseCreateDatabase from "../src/promiseCreateDatabase";
-import promiseDeleteDatabase from "../src/promiseDeleteDatabase";
+import {promiseDatabaseNames, promiseCreateDatabase, promiseDeleteDatabase} from "../src/influx/influxServices";
 import {expect} from "chai";
 import config from '../src/config'
 describe('Database Names', () => {
@@ -8,7 +6,7 @@ describe('Database Names', () => {
         return promiseDeleteDatabase()
             .then(promiseDatabaseNames)
             .then(names => expect(names).not.includes(config.databaseName))
-            .then(() => promiseCreateDatabase())
+            .then(promiseCreateDatabase)
             .then(promiseDatabaseNames)
             .then(names => expect(names).includes(config.databaseName))
     })
