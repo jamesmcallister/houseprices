@@ -1,0 +1,22 @@
+resources:
+- name: source-code
+  type: git
+  source:
+    uri: git@github.com:jamesmcallister/houseprices.git
+    branch: concourse
+    private_key: {{private_key}}
+
+- name: pipeline-worker
+  type: docker-image
+  source:
+    repository: "docker:registry:8080/pipeline-worker"
+    insecure_registries: ["docker:registry:8080"]
+
+jobs:
+- name: main
+  plan:
+  - get: source-code
+  - put: pipeline-worker
+    params:
+      build: source-code
+
