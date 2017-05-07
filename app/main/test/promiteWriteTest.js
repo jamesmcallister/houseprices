@@ -4,14 +4,24 @@ import { spy, stub } from 'sinon'
 
 describe('Promise Write Database', () => {
   it('Test writes to Database', () => {
+    const config = '../src/config.js'
+    const fakeWritePointData = [
+      {
+        measurement: 'response_times_2',
+        tags: { host: config.influxDbHost },
+        fields: { duration: 123, path: 'testpath' }
+      }
+    ]
     const fakeinfluxDbHost = 'fakeinfluxDbHost'
     const fakeGetDatabaseClient = stub().returns(Promise.resolve([]))
-    const fakeWritePoint = () => {}
-    return promiseWriteDataBuilder(fakeGetDatabaseClient)(fakeinfluxDbHost)(
-      fakeWritePoint
-    )([]).then(() => {
+    const fakeWritePoint = {
+      writePoints: fakeGetDatabaseClient
+    }
+    return promiseWriteDataBuilder(fakeWritePoint)(
+      fakeWritePointData
+    ).then(() => {
       expect(fakeGetDatabaseClient.called).true
-      expect(fakeGetDatabaseClient.calledWith(fakeinfluxDbHost)).true
+      expect(fakeGetDatabaseClient.calledWith(fakeWritePointData)).true
     })
   })
 })

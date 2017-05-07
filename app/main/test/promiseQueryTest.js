@@ -1,16 +1,25 @@
 import promiseQueryBuilder from '../src/influx/promiseQueryBuilder.js'
 import { expect } from 'chai'
 import sinon, { spy } from 'sinon'
+import config from '../src/config.js'
+import { escape } from 'influx'
 
 describe('Promise Read Database', () => {
-  it('Calls the influx with fake host name', () => {
+  it('Calls the influx with fake query', () => {
+    const fakeQuery = `
+      select * from response_times_2
+      where host = ${escape.stringLit(config.influxDbHost)}
+      order by time desc
+      limit`
+
     const fakeinfluxDbHost = 'fakeinfluxDbHost'
     const fakeGetDatabaseClient = sinon.stub().returns(Promise.resolve([]))
-    return promiseQueryBuilder(fakeGetDatabaseClient)(
-      fakeinfluxDbHost
-    ).then(() => {
+
+    const fakeInfluxClient = {
+      query: fakeGetDatabaseClient
+    }
+    return promiseQueryBuilder(fakeInfluxClient)(fakeQuery).then(() => {
       expect(fakeGetDatabaseClient.called).true
-      expect(fakeGetDatabaseClient.calledWith(fakeinfluxDbHost)).true
     })
   })
 })
