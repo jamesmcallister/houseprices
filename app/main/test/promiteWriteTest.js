@@ -4,7 +4,7 @@ import { spy, stub } from 'sinon'
 
 describe('Promise Write Database', () => {
   it('Test writes to Database', () => {
-    const config = '../src/config.js'
+    const config = '../src/config/config.js'
     const fakeWritePointData = [
       {
         measurement: 'response_times_2',
@@ -17,9 +17,7 @@ describe('Promise Write Database', () => {
     const fakeWritePoint = {
       writePoints: fakeGetDatabaseClient
     }
-    return promiseWriteDataBuilder(fakeWritePoint)(
-      fakeWritePointData
-    ).then(() => {
+    return promiseWriteDataBuilder(fakeWritePoint)(fakeWritePointData).then(() => {
       expect(fakeGetDatabaseClient.called).true
       expect(fakeGetDatabaseClient.calledWith(fakeWritePointData)).true
     })

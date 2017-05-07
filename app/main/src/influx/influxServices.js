@@ -1,4 +1,4 @@
-import config from '../config'
+import config from '../config/config'
 import influxClientBuilder from './influxClientBuilder'
 import promiseCreateDatabaseBuilder from './promiseCreateDatabaseBuilder'
 import promiseDatabaseBuilder from './promiseDatabaseBuilder'
