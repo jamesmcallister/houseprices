@@ -24,7 +24,9 @@
     "int": "export INFLUXDB_HOST=\"$(docker inspect --format '{{ .NetworkSettings.IPAddress }}' influxdb)\" && npm run compile && npm run int-compile && mocha ./app/target/integration",
     "influxtest": "export INFLUXDB_HOST=\"$(docker inspect --format '{{ .NetworkSettings.IPAddress }}' influxdb)\" && npm run compile && node ./app/target/src/influxtest.js",
     "test:james": "export INFLUXDB_HOST=\"$(docker inspect --format '{{ .NetworkSettings.IPAddress }}' influxdb)\" && mocha --colors --compilers js:babel-register ./app/main/test/**/*",
-    "test:watch": "watch-run -i -p './app/main/**/*' npm run test:james"
+    "test:watch": "watch-run -i -p './app/main/**/*' npm run test:james",
+    "int:james": "export INFLUXDB_HOST=\"$(docker inspect --format '{{ .NetworkSettings.IPAddress }}' influxdb)\" && mocha --colors --compilers js:babel-register ./app/main/integration",
+    "int:watch": "watch-run -i -p './app/main/**/*' npm run int:james"
   },
   "author": "",
   "license": "UNLINCED",
