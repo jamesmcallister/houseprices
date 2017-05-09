@@ -3,5 +3,5 @@ export default {
   influxDbHost: process.env.INFLUXDB_HOST,
   databaseName: 'testit',
   schema: schema,
-  importData: '/var/houseprices/data/pp.csv'
+  importDataPath: '/var/houseprices/data/pp.csv'
 }

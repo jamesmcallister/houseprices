@@ -17,8 +17,9 @@ describe('Local dev setup', () => {
     expect(process.env.INFLUXDB_HOST).not.to.be.null
     expect(process.env.INFLUXDB_HOST).ok
   })
-  it(`${config.importData} should be there`, () => {
-    const file = existsSync(config.importData)
+  it(`${config.importDataPath} should be there`, () => {
+    const file = existsSync(config.importDataPath)
+    console.log(file, config.importDataPath)
     expect(file).true
   })
 })
