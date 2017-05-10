@@ -1,1 +1,1 @@
-export default csvClient => fileToImport => csvClient.fromFile(fileToImport)
+export default csvClient => options => fileToImport => csvClient(options).fromFile(fileToImport)

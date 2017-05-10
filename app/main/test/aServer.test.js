@@ -19,7 +19,6 @@ describe('Local dev setup', () => {
   })
   it(`${config.importDataPath} should be there`, () => {
     const file = existsSync(config.importDataPath)
-    console.log(file, config.importDataPath)
     expect(file).true
   })
 })
