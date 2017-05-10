@@ -7,13 +7,17 @@ describe('Read file form disk', () => {
   it('can read csv file', () => {
     const fakeFileImportFucntion = sinon.stub().returns(Promise.resolve([]))
 
-    const fakeFileImportClient = fakeOptions => ({ fromFile: fakeFileImportFucntion })
+    const fakeFileImportClient = fakeOptions => ({
+      fromFile: fakeFileImportFucntion
+    })
 
     const fakeOptions = x => ({
       noheader: true
     })
 
-    return importFileBuilder(fakeFileImportClient)(fakeOptions)(config.importDataPath).then(() => {
+    return importFileBuilder(fakeFileImportClient)(fakeOptions)(
+      config.importDataPath
+    ).then(() => {
       expect(fakeFileImportFucntion.called).true
       expect(fakeFileImportFucntion.calledWith(config.importDataPath)).true
     })

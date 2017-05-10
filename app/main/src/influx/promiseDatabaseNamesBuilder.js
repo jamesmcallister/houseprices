@@ -1,1 +1,1 @@
-export default influxClient => influxClient.getDatabaseNames();
+export default influxClient => influxClient.getDatabaseNames()

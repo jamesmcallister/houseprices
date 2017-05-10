@@ -17,7 +17,9 @@ describe('Promise Write Database', () => {
     const fakeWritePoint = {
       writePoints: fakeGetDatabaseClient
     }
-    return promiseWriteDataBuilder(fakeWritePoint)(fakeWritePointData).then(() => {
+    return promiseWriteDataBuilder(fakeWritePoint)(
+      fakeWritePointData
+    ).then(() => {
       expect(fakeGetDatabaseClient.called).true
       expect(fakeGetDatabaseClient.calledWith(fakeWritePointData)).true
     })
