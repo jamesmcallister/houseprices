@@ -1,5 +1,5 @@
 import promiseDatabaseNamesBuilder
-  from '../src/influx/promiseDatabaseNamesBuilder'
+  from '../../src/influx/promiseDatabaseNamesBuilder'
 
 import { expect } from 'chai'
 import sinon from 'sinon'
