@@ -1,4 +1,4 @@
-import promiseWriteDataBuilder from '../src/influx/promiseWriteBuilder.js'
+import promiseWriteDataBuilder from '../../src/influx/promiseWriteBuilder.js'
 import { expect } from 'chai'
 import { spy, stub } from 'sinon'
 

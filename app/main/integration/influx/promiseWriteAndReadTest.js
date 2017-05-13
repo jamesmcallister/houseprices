@@ -1,10 +1,10 @@
-import config from '../src/config/config.js'
+import config from '../../src/config/config.js'
 import {
   promiseWrite,
   promiseQuery,
   promiseDeleteDatabase,
   promiseDatabase
-} from '../src/influx/influxServices'
+} from '../../src/influx/influxServices'
 
 import { expect, assert } from 'chai'
 describe('Database Names', () => {

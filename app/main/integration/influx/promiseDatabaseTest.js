@@ -1,9 +1,9 @@
-import config from '../src/config/config.js'
+import config from '../../src/config/config.js'
 import {
   promiseDatabase,
   promiseDatabaseNames,
   promiseDeleteDatabase
-} from '../src/influx/influxServices'
+} from '../../src/influx/influxServices'
 import { expect } from 'chai'
 describe('Database Names', () => {
   it('Returns a list that does not include a deleted name and includes a name when created', () => {
