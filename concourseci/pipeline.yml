@@ -9,8 +9,8 @@ resources:
 - name: pipeline-worker
   type: docker-image
   source:
-    repository: "172.17.0.2:5000/pipeline-worker"
-    insecure_registries: ["172.17.0.2:5000"]
+    repository: "192.168.56.101:5000/pipeline-worker"
+    insecure_registries: ["192.168.56.101:5000"]
 
 jobs:
 - name: main
@@ -20,18 +20,16 @@ jobs:
     params:
       build: source-code
 
-- name: total
+- name: hello-world-2
   plan:
-  - get: source-code
   - get: pipeline-worker
-  - task: hello
+    passed: [main]
+  - get: source-code
+  - task: say-hello
     config:
       platform: linux
       image: pipeline-worker
-      inputs:
-      - name: source-code
       run:
         path: echo
-        args:
-        - hello world
+        args: ["Hello, world!"]
 
