@@ -9,8 +9,8 @@ resources:
 - name: pipeline-worker
   type: docker-image
   source:
-    repository: "192.168.56.101:5000/pipeline-worker"
-    insecure_registries: ["192.168.56.101:5000"]
+    repository: "concourse-registry:5000/pipeline-worker"
+    insecure_registries: ["concourse-registry:5000"]
 
 jobs:
 - name: main

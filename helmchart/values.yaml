@@ -1,0 +1,4 @@
+dockerRegistryDns: concourse-registry
+concourse:
+  dockerRegistry: concourse-registry:5000
+  insecureDockerRegistry: concourse-registry:5000

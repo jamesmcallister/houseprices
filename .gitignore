@@ -44,3 +44,4 @@ data
 target
 *.retry
 .vscode
+/helmchart/**/*.tgz
