@@ -18,7 +18,7 @@ jobs:
   - get: source-code
   - put: pipeline-worker
     params:
-      build: source-code
+      build: source-code/docker
 
 - name: hello-world-2
   plan:
