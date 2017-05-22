@@ -4,7 +4,7 @@ kind: Pod
 metadata:
   name: {{ .Release.Name }}-registry-deployment
   labels:
-    app: web
+    app: {{ .Release.Name }}-registry-deployment
 spec:
   containers:
     - name: docker-registry
