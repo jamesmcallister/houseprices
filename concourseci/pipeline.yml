@@ -26,9 +26,9 @@ jobs:
     passed: [main]
   - get: source-code
   - task: say-hello
+    image: pipeline-worker
     config:
       platform: linux
-      image: pipeline-worker
       run:
         path: echo
         args: ["Hello, world!"]
