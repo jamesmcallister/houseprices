@@ -11,7 +11,7 @@ describe('Promise Database', () => {
       expect(fakePromiseCreateDatabase.called).toBe(true)
       expect(fakePromiseCreateDatabase.calledWith(testDatabaseName)).toBe(true)
       expect(fakePromiseDatabaseNames.called).toBe(true)
-    });
+    })
   })
   it('Does not calls the influx createDatabase when database present', () => {
     const fakePromiseCreateDatabase = sinon.stub().returns(Promise.resolve())
@@ -23,6 +23,6 @@ describe('Promise Database', () => {
     )(testDatabaseName).then(() => {
       expect(fakePromiseCreateDatabase.called).toBe(false)
       expect(fakePromiseDatabaseNames.called).toBe(true)
-    });
+    })
   })
 })

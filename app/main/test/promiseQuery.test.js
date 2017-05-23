@@ -19,6 +19,6 @@ describe('Promise Read Database', () => {
     }
     return promiseQueryBuilder(fakeInfluxClient)(fakeQuery).then(() => {
       expect(fakeGetDatabaseClient.called).toBe(true)
-    });
+    })
   })
 })

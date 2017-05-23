@@ -11,6 +11,6 @@ describe('Promise Database Names', () => {
     }
     return promiseDatabaseNamesBuilder(fakeInfluxClient).then(() => {
       expect(fakeGetDatabaseNames.called).toBe(true)
-    });
+    })
   })
 })

@@ -13,6 +13,6 @@ describe('Promise Delete Database', () => {
     ).then(() => {
       expect(fakeDropDatabase.called).toBe(true)
       expect(fakeDropDatabase.calledWith(testDatabaseName)).toBe(true)
-    });
+    })
   })
 })

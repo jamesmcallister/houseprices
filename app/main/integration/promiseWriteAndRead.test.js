@@ -6,8 +6,8 @@ import {
   promiseDeleteDatabase,
   promiseDatabase
 } from '../src/influx/influxServices'
+import { assert } from 'chai'
 
-import { expect, assert } from 'chai'
 describe('Database Write and Read', () => {
   it('Returns a list that does not include a deleted name and includes a name when created', () => {
     return promiseDeleteDatabase()
@@ -20,9 +20,9 @@ describe('Database Write and Read', () => {
             fields: {
               price: '600',
               date: 2021,
-              postcode: 'ct11aa',
-              city: 'canterbury',
-              county: 'kent'
+              postcode: 'lu22lu',
+              city: 'somecity',
+              county: 'county'
             }
           }
         ])
@@ -41,11 +41,12 @@ describe('Database Write and Read', () => {
         const currentTimeLess60 = Date.now() * 1000000
         const timeDiff = 60000000
 
-        expect(price).to.equal(600)
-        expect(date).to.equal('2021')
-        expect(city).to.equal('canterbury')
+        expect(price).toBe(600)
+        expect(date).toBe('2021')
+        expect(city).toBe('somecity')
         assert.closeTo(timeFromDataBase, currentTimeLess60, timeDiff)
       })
-      .catch(error => logger.error(__filename, error))
+    // .then(promiseDeleteDatabase())
+    // .catch(error => logger.error('ahhhh', error))
   })
 })

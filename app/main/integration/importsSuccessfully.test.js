@@ -1,8 +1,6 @@
 import { importFile } from '../src/csv/importServices'
 import logger from '../src/helpers/logger'
 import { tryCatch } from '../src/helpers/either'
-import { expect, assert } from 'chai'
-// import { wg } from '../src/config/helper'
 import config from '../src/config/config'
 import {
   csvOptions,
@@ -11,6 +9,7 @@ import {
   includedColumns
 } from '../src/csv/csvImportOptions'
 import {
+  promiseCreateDatabase,
   promiseWrite,
   promiseQuery,
   promiseDeleteDatabase,
@@ -19,7 +18,7 @@ import {
 
 const writeToInflux = dataToBeWriten => {
   const { price, date, postcode, city, county } = dataToBeWriten
-  promiseWrite([
+  return promiseWrite([
     {
       measurement: 'response_times',
       tags: { host: 'testHost' },
@@ -31,32 +30,43 @@ const writeToInflux = dataToBeWriten => {
         county: county
       }
     }
-  ])
+  ]).catch(err => logger.warn('writeToInflux()', err))
 }
 
 const readFromInflux = () => {
-  promiseQuery(
+  return promiseQuery(
     `select * from response_times
       where host = 'testHost'
       order by time desc
       limit 10 `
-  )
+  ).catch(err => logger.warn('readFromInflux()', err))
 }
 
 describe('Imports successfully', () => {
   it('Writes File to influx', () => {
-    promiseDatabase()
+    return promiseDeleteDatabase()
+      .then(promiseCreateDatabase())
       .then(
         importFile(csvOptions)(config.importDataPath).on('json', jsonObj =>
-          tryCatch(() => writeToInflux(jsonObj))
-            .chain(promiseDatabase)
-            .fold(err => logger.error(getFilename, err), expect().to.be(true))
+          writeToInflux(jsonObj)
         )
+        // .on('done', err => logger.warn('importFile() err', err))
       )
-      .catch(err => logger.error(getFilename, err))
+      .catch(err => {
+        logger.error('promiseCreateDatabase()', err)
+      })
+  })
+  it('reads the data', () => {
+    const stringToUse = `[{"city": "HACKNEY", "county": "GREATER LONDON", "date": "2006-06-22 00:00", "host": "testHost", "postcode": "E8 1EN", "price": 245000, "time": 2017-05-23T21:55:20.026Z}]`
+
+    return readFromInflux().then(data =>
+      expect(data).toEqual(expect.stringContaining(stringToUse))
+    )
+  })
+  it('deletes the DB', () => {
+    const spy = spyOn(promiseDeleteDatabase(), 'play')
+    // expect(spy).toHaveBeenCalled()
+    // expect(promiseDeleteDatabase).toBe(true)
+    // expect(spy.promiseDeleteDatabase()).toBeCalled()
   })
 })
-
-// tryCatch(() => writeToInflux(jsonObj))
-//   .chain(promiseDatabase)
-//   .fold(err => logger.warn(err), console.log('erere'))

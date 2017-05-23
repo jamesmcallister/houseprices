@@ -21,6 +21,6 @@ describe('Promise Write Database', () => {
     ).then(() => {
       expect(fakeGetDatabaseClient.called).toBe(true)
       expect(fakeGetDatabaseClient.calledWith(fakeWritePointData)).toBe(true)
-    });
+    })
   })
 })

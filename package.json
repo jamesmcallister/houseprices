@@ -23,12 +23,14 @@
     "ingest": "npm run compile && node ./app/target/src/ingest.js",
     "int": "export INFLUXDB_HOST=\"$(docker inspect --format '{{ .NetworkSettings.IPAddress }}' influxdb)\" && npm run compile && npm run int-compile && mocha ./app/target/integration/**/*",
     "influxtest": "export INFLUXDB_HOST=\"$(docker inspect --format '{{ .NetworkSettings.IPAddress }}' influxdb)\" && npm run compile && node ./app/target/src/influxtest.js",
-    "test": "jest",
+    "test": "export INFLUXDB_HOST=\"$(docker inspect --format '{{ .NetworkSettings.IPAddress }}' influxdb)\" && jest",
+    "jest": "export INFLUXDB_HOST=\"$(docker inspect --format '{{ .NetworkSettings.IPAddress }}' influxdb)\" && jest",
     "test:watch": "export INFLUXDB_HOST=\"$(docker inspect --format '{{ .NetworkSettings.IPAddress }}' influxdb)\" && jest --watch"
   },
   "author": "",
   "license": "UNLINCED",
   "devDependencies": {
+    "@types/jest": "^19.2.3",
     "babel-cli": "6.24.1",
     "babel-eslint": "7.2.3",
     "babel-preset-es2015": "6.24.1",

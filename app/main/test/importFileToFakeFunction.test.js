@@ -18,7 +18,9 @@ describe('Read file form disk', () => {
       config.importDataPath
     ).then(() => {
       expect(fakeFileImportFucntion.called).toBe(true)
-      expect(fakeFileImportFucntion.calledWith(config.importDataPath)).toBe(true)
-    });
+      expect(fakeFileImportFucntion.calledWith(config.importDataPath)).toBe(
+        true
+      )
+    })
   })
 })

@@ -13,6 +13,6 @@ describe('Promise Create Database', () => {
     ).then(() => {
       expect(fakeCreateDatabase.called).toBe(true)
       expect(fakeCreateDatabase.calledWith(testDatabaseName)).toBe(true)
-    });
+    })
   })
 })
