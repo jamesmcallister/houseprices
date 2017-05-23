@@ -1,6 +1,5 @@
 import promiseDeleteDatabaseBuilder
   from '../src/influx/promiseDeleteDatabaseBuilder'
-import { expect } from 'chai'
 import sinon from 'sinon'
 describe('Promise Delete Database', () => {
   const testDatabaseName = 'promiseCreateDatabaseTest'
@@ -12,8 +11,8 @@ describe('Promise Delete Database', () => {
     return promiseDeleteDatabaseBuilder(fakeInfluxClient)(
       testDatabaseName
     ).then(() => {
-      expect(fakeDropDatabase.called).true
-      expect(fakeDropDatabase.calledWith(testDatabaseName)).true
-    })
+      expect(fakeDropDatabase.called).toBe(true)
+      expect(fakeDropDatabase.calledWith(testDatabaseName)).toBe(true)
+    });
   })
 })

@@ -1,5 +1,4 @@
 import promiseQueryBuilder from '../src/influx/promiseQueryBuilder.js'
-import { expect } from 'chai'
 import sinon, { spy } from 'sinon'
 import config from '../src/config/config.js'
 import { escape } from 'influx'
@@ -19,7 +18,7 @@ describe('Promise Read Database', () => {
       query: fakeGetDatabaseClient
     }
     return promiseQueryBuilder(fakeInfluxClient)(fakeQuery).then(() => {
-      expect(fakeGetDatabaseClient.called).true
-    })
+      expect(fakeGetDatabaseClient.called).toBe(true)
+    });
   })
 })

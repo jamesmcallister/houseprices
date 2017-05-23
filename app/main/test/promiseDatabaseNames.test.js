@@ -1,7 +1,6 @@
 import promiseDatabaseNamesBuilder
   from '../src/influx/promiseDatabaseNamesBuilder'
 
-import { expect } from 'chai'
 import sinon from 'sinon'
 describe('Promise Database Names', () => {
   const testDatabaseName = 'promiseDatabaseNamesTest'
@@ -11,7 +10,7 @@ describe('Promise Database Names', () => {
       getDatabaseNames: fakeGetDatabaseNames
     }
     return promiseDatabaseNamesBuilder(fakeInfluxClient).then(() => {
-      expect(fakeGetDatabaseNames.called).true
-    })
+      expect(fakeGetDatabaseNames.called).toBe(true)
+    });
   })
 })

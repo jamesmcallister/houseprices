@@ -1,6 +1,5 @@
 import promiseCreateDatabaseBuilder
   from '../src/influx/promiseCreateDatabaseBuilder'
-import { expect } from 'chai'
 import sinon from 'sinon'
 describe('Promise Create Database', () => {
   const testDatabaseName = 'promiseCreateDatabaseTest'
@@ -12,8 +11,8 @@ describe('Promise Create Database', () => {
     return promiseCreateDatabaseBuilder(fakeInfluxClient)(
       testDatabaseName
     ).then(() => {
-      expect(fakeCreateDatabase.called).true
-      expect(fakeCreateDatabase.calledWith(testDatabaseName)).true
-    })
+      expect(fakeCreateDatabase.called).toBe(true)
+      expect(fakeCreateDatabase.calledWith(testDatabaseName)).toBe(true)
+    });
   })
 })

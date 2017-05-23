@@ -1,5 +1,4 @@
 import promiseDatabaseBuilder from '../src/influx/promiseDatabaseBuilder'
-import { expect } from 'chai'
 import sinon from 'sinon'
 describe('Promise Database', () => {
   const testDatabaseName = 'promiseDatabaseTest'
@@ -9,10 +8,10 @@ describe('Promise Database', () => {
     return promiseDatabaseBuilder(fakePromiseDatabaseNames)(
       fakePromiseCreateDatabase
     )(testDatabaseName).then(() => {
-      expect(fakePromiseCreateDatabase.called).true
-      expect(fakePromiseCreateDatabase.calledWith(testDatabaseName)).true
-      expect(fakePromiseDatabaseNames.called).true
-    })
+      expect(fakePromiseCreateDatabase.called).toBe(true)
+      expect(fakePromiseCreateDatabase.calledWith(testDatabaseName)).toBe(true)
+      expect(fakePromiseDatabaseNames.called).toBe(true)
+    });
   })
   it('Does not calls the influx createDatabase when database present', () => {
     const fakePromiseCreateDatabase = sinon.stub().returns(Promise.resolve())
@@ -22,8 +21,8 @@ describe('Promise Database', () => {
     return promiseDatabaseBuilder(fakePromiseDatabaseNames)(
       fakePromiseCreateDatabase
     )(testDatabaseName).then(() => {
-      expect(fakePromiseCreateDatabase.called).false
-      expect(fakePromiseDatabaseNames.called).true
-    })
+      expect(fakePromiseCreateDatabase.called).toBe(false)
+      expect(fakePromiseDatabaseNames.called).toBe(true)
+    });
   })
 })

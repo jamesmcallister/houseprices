@@ -1,5 +1,4 @@
 import promiseWriteDataBuilder from '../src/influx/promiseWriteBuilder.js'
-import { expect } from 'chai'
 import { spy, stub } from 'sinon'
 
 describe('Promise Write Database', () => {
@@ -20,8 +19,8 @@ describe('Promise Write Database', () => {
     return promiseWriteDataBuilder(fakeWritePoint)(
       fakeWritePointData
     ).then(() => {
-      expect(fakeGetDatabaseClient.called).true
-      expect(fakeGetDatabaseClient.calledWith(fakeWritePointData)).true
-    })
+      expect(fakeGetDatabaseClient.called).toBe(true)
+      expect(fakeGetDatabaseClient.calledWith(fakeWritePointData)).toBe(true)
+    });
   })
 })
