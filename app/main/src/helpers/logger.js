@@ -5,7 +5,10 @@ const location = `/var/houseprices`
 
 let logger = new winston.Logger({
   transports: [
-    new winston.transports.Console(),
+    new winston.transports.Console({
+      colorize: true,
+      level: 'debug'
+    }),
     new winston.transports.File({
       name: 'info-file',
       filename: `${location}/filelog-info.log`,
@@ -23,5 +26,14 @@ let logger = new winston.Logger({
     })
   ]
 })
+logger.cli()
 
 export default logger
+
+export const getFilename = module => {
+  return module.filename.split('/').slice(-2).join('/')
+}
+
+// logger.info("127.0.0.1 - there's no place like home")
+// logger.warn("127.0.0.1 - there's no place like home")
+// logger.error("127.0.0.1 - there's no place like home")

@@ -7,14 +7,13 @@ import promiseDeleteDatabaseBuilder from './promiseDeleteDatabaseBuilder'
 import promiseQueryBuilder from './promiseQueryBuilder'
 import promiseWriteBuilder from './promiseWriteBuilder'
 
-const databaseName = config.databaseName
 const influxClientForDefaultDatabaseAndSchema = influxClientBuilder(
   config.influxDbHost
-)(databaseName)(config.schema)
+)(config.databaseName)(config.schema)
 
 export const promiseCreateDatabase = () =>
   promiseCreateDatabaseBuilder(influxClientForDefaultDatabaseAndSchema)(
-    databaseName
+    config.databaseName
   )
 
 export const promiseDatabaseNames = () =>
@@ -22,12 +21,12 @@ export const promiseDatabaseNames = () =>
 
 export const promiseDatabase = () =>
   promiseDatabaseBuilder(promiseDatabaseNames)(promiseCreateDatabase)(
-    databaseName
+    config.databaseName
   )
 
 export const promiseDeleteDatabase = () =>
   promiseDeleteDatabaseBuilder(influxClientForDefaultDatabaseAndSchema)(
-    databaseName
+    config.databaseName
   )
 
 export const promiseQuery = query =>
