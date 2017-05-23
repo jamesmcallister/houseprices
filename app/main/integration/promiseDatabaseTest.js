@@ -1,4 +1,6 @@
 import config from '../src/config/config.js'
+import logger from '../helpers/logger'
+
 import {
   promiseDatabase,
   promiseDatabaseNames,
@@ -10,7 +12,7 @@ describe('Database Names', () => {
     return promiseDeleteDatabase()
       .then(promiseDatabaseNames)
       .then(names => {
-        console.log(names)
+        logger.info('debug', names)
         expect(names).not.includes(config.databaseName)
       })
       .then(() => promiseDatabase())
