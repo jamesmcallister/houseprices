@@ -3,16 +3,17 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ .Values.dockerRegistryDns }}
+  name: {{ .Values.dockerInfluxDbDns }}
   labels:
     heritage: {{ .Release.Service | quote }}
     release: {{ .Release.Name | quote }}
     chart: "{{.Chart.Name}}-{{.Chart.Version}}"
 spec:
+  type: ClusterIP
   ports:
-  - port: {{default 5000 .Values.httpPort}}
-    targetPort: 5000
+  - port: {{default 8086 .Values.httpPort}}
+    targetPort: 8086
     protocol: TCP
     name: http
   selector:
-    app: {{ .Release.Name }}-registry-deployment
+    app: {{ .Release.Name }}-influxdb-deployment
