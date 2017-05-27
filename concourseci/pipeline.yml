@@ -30,6 +30,11 @@ jobs:
     config:
       platform: linux
       run:
-        path: echo
-        args: ["Hello, world!"]
-
+        path: /bin/bash
+        args:
+        - -exc
+        - |
+          pushd source-code
+            npm install -DE
+            npm run test
+          popd
