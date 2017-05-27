@@ -1,0 +1,29 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: registry-ingress
+  annotations:
+    ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - host: registry.invalid
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: {{ .Values.dockerRegistryDns }}
+          servicePort: 5000
+  - host: influxdb.invalid
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: {{ .Values.dockerInfluxDbDns }}
+          servicePort: 8086
+  - host: concourse.invalid
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: {{ .Release.Name }}-web
+          servicePort: 8080

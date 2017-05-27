@@ -1,0 +1,17 @@
+---
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-influxdb-deployment
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-influxdb-deployment
+    spec:
+      containers:
+        - name: influxdb
+          image: influxdb
+          ports:
+          - containerPort: 8086

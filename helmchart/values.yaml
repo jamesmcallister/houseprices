@@ -1,4 +1,11 @@
 dockerRegistryDns: concourse-registry
+dockerInfluxDbDns: influxdb-host
 concourse:
-  dockerRegistry: concourse-registry:5000
-  insecureDockerRegistry: concourse-registry:5000
+  concourse:
+    dockerRegistry: concourse-registry:5000
+    insecureDockerRegistry: concourse-registry:5000
+  web:
+    ingress:
+      enabled: true
+      hosts:
+      - "concourse-web"
