@@ -23,17 +23,19 @@ jobs:
 - name: hello-world-2
   plan:
   - get: pipeline-worker
-    passed: [main]
   - get: source-code
   - task: say-hello
     image: pipeline-worker
     config:
       platform: linux
+      inputs:
+        - name: source-code
       run:
-        path: /bin/bash
+        path: bash
         args:
         - -exc
         - |
+          ls
           pushd source-code
             npm install -DE
             npm run test
