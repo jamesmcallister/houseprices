@@ -35,7 +35,7 @@ jobs:
         args:
         - -exc
         - |
-          ls
+          . ~/.bashrc
           pushd source-code
             npm install -DE
             npm run test
