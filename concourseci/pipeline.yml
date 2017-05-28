@@ -36,14 +36,15 @@ jobs:
 
 - name: minio-test
   plan:
-  - get: pipeline-worker
+  - get: mc
   - task: say-hello
     image: mc
     config:
       platform: linux
       run:
-        path: ls
+        path: mc
         args:
+        - ls
         - minio
 
 - name: hello-world-2
