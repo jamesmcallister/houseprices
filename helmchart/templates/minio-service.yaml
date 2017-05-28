@@ -11,7 +11,7 @@ metadata:
 spec:
   type: ClusterIP
   ports:
-  - port: {{default 5000 .Values.httpPort}}
+  - port: {{default 9000 .Values.httpPort}}
     targetPort: 9000
     protocol: TCP
     name: http
