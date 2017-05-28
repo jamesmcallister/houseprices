@@ -6,6 +6,15 @@ resources:
     branch: concourse
     private_key: {{private_key}}
 
+- name: worker-source-code
+  type: git
+  source:
+    uri: git@github.com:jamesmcallister/houseprices.git
+    branch: concourse
+    private_key: {{private_key}}
+  paths:
+  - "docker/worker"
+
 - name: pipeline-worker
   type: docker-image
   source:
@@ -20,12 +29,12 @@ resources:
     insecure_registries: ["concourse-registry:5000"]
 
 jobs:
-- name: main
+- name: nodejs-worker-build
   plan:
-  - get: source-code
+  - get: worker-source-code
   - put: pipeline-worker
     params:
-      build: source-code/docker/worker
+      build: worker-source-code/docker/worker
 
 - name: mc
   plan:
