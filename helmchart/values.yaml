@@ -1,5 +1,6 @@
 dockerRegistryDns: concourse-registry
 dockerInfluxDbDns: influxdb-host
+dockerMinioDns: minio
 concourse:
   concourse:
     dockerRegistry: concourse-registry:5000

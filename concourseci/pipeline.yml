@@ -12,13 +12,39 @@ resources:
     repository: "concourse-registry:5000/pipeline-worker"
     insecure_registries: ["concourse-registry:5000"]
 
+
+- name: mc
+  type: docker-image
+  source:
+    repository: "concourse-registry:5000/mc"
+    insecure_registries: ["concourse-registry:5000"]
+
 jobs:
 - name: main
   plan:
   - get: source-code
   - put: pipeline-worker
     params:
-      build: source-code/docker
+      build: source-code/docker/worker
+
+- name: mc
+  plan:
+  - get: source-code
+  - put: mc
+    params:
+      build: source-code/docker/mc
+
+- name: minio-test
+  plan:
+  - get: pipeline-worker
+  - task: say-hello
+    image: mc
+    config:
+      platform: linux
+      run:
+        path: ls
+        args:
+        - minio
 
 - name: hello-world-2
   plan:
