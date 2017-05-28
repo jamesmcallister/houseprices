@@ -5,6 +5,8 @@ resources:
     uri: git@github.com:jamesmcallister/houseprices.git
     branch: concourse
     private_key: {{private_key}}
+  ignore_paths:
+  - "docker"
 
 - name: worker-source-code
   type: git
@@ -14,6 +16,15 @@ resources:
     private_key: {{private_key}}
   paths:
   - "docker/worker"
+
+- name: mc-source-code
+  type: git
+  source:
+    uri: git@github.com:jamesmcallister/houseprices.git
+    branch: concourse
+    private_key: {{private_key}}
+  paths:
+  - "docker/mc"
 
 - name: pipeline-worker
   type: docker-image
@@ -39,8 +50,10 @@ jobs:
       build: worker-source-code/docker/worker
 
 - name: mc
+  serial: true
   plan:
-  - get: source-code
+  - get: mc-source-code  
+    trigger: true
   - put: mc
     params:
       build: source-code/docker/mc
