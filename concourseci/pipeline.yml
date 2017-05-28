@@ -30,8 +30,10 @@ resources:
 
 jobs:
 - name: nodejs-worker-build
+  serial: true
   plan:
   - get: worker-source-code
+    trigger: true
   - put: pipeline-worker
     params:
       build: worker-source-code/docker/worker
