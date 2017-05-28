@@ -27,3 +27,11 @@ spec:
         backend:
           serviceName: {{ .Release.Name }}-web
           servicePort: 8080
+
+  - host: minio.invalid
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: {{ .Values.dockerMinioDns }}
+          servicePort: 9000
