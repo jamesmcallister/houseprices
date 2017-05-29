@@ -1,4 +1,6 @@
-import promiseDatabaseNamesBuilder from '../src/influx/promiseDatabaseNamesBuilder'
+import promiseDatabaseNamesBuilder
+  from '../src/influx/promiseDatabaseNamesBuilder'
+
 import { expect } from 'chai'
 import sinon from 'sinon'
 describe('Promise Database Names', () => {

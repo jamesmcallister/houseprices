@@ -1,4 +1,5 @@
-import promiseDeleteDatabaseBuilder from '../src/influx/promiseDeleteDatabaseBuilder'
+import promiseDeleteDatabaseBuilder
+  from '../src/influx/promiseDeleteDatabaseBuilder'
 import { expect } from 'chai'
 import sinon from 'sinon'
 describe('Promise Delete Database', () => {

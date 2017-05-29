@@ -5,4 +5,3 @@ export default influxDbHost => databaseName => schema =>
     database: databaseName,
     schema: schema
   })
-
