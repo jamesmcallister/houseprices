@@ -1,8 +1,23 @@
+resource_types:
+- name: pull-request
+  type: docker-image
+  source:
+    repository: jtarchie/pr
+
 resources:
+- name: git-pull-requests
+  type: pull-request
+  source:
+    access_token: {{github-access-token}}
+    private_key: {{github-private-key}}
+    repo: jamesmcallister/uk-analytics
+    url: "git@github.com:jamesmcallister/uk-analytics.git"
+    every: true
+
 - name: source-code
   type: git
   source:
-    uri: git@github.com:jamesmcallister/houseprices.git
+    uri: git@github.com:jamesmcallister/uk-analytics.git
     branch: concourse
     private_key: {{private_key}}
   ignore_paths:
@@ -40,10 +55,67 @@ resources:
     insecure_registries: ["concourse-registry:5000"]
 
 jobs:
+- name: pull-reqests
+  serial: true
+  plan:
+  - get:  git-pull-requests
+    trigger: true
+    version: every
+  - get: mc
+  - get: pipeline-worker
+  - task: fetch-cache
+    image: mc
+    config:
+      platform: linux
+      outputs:
+        - name: npmcache-in
+      run:
+        path: sh
+        args:
+        - -exc
+        - |
+          mc cp --recursive minio/npmcache fetched
+          mv fetched/npmcache/* npmcache-in
+  - task: npm-test
+    image: pipeline-worker
+    config:
+      platform: linux
+      inputs:
+        - name: source-code
+        - name: npmcache-in
+      outputs:
+        - name: npmcache-out
+      run:
+        path: bash
+        args:
+        - -exc
+        - |
+          . ~/.bashrc
+          pushd source-code
+            mkdir node_modules
+            mkdir ~/.npm
+            tar xzf ../npmcache-in/npmcache.tar.gz -C node_modules
+            tar xzf ../npmcache-in/npm.tar.gz -C ~/.npm
+            npm install -DE
+            npm run unit
+            npm run int
+            tar czf ../npmcache-out/npmcache.tar.gz -C node_modules .
+            tar czf ../npmcache-out/npm.tar.gz -C ~/.npm .
+          popd
+    on_success:
+      put:  git-pull-requests
+      params: git-pull-requests
+      status: success
+    on_failure:
+      put:  git-pull-requests
+      params: git-pull-requests
+      status: failure
+
 - name: nodejs-worker-build
   serial: true
   plan:
   - get: worker-source-code
+
     trigger: true
   - put: pipeline-worker
     params:

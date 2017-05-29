@@ -21,9 +21,9 @@
     "test-compile": "babel ./app/main/test --out-dir ./app/target/test",
     "int-compile": "babel ./app/main/integration --out-dir ./app/target/integration",
     "ingest": "npm run compile && node ./app/target/src/ingest.js",
-    "int": "export INFLUXDB_HOST=\"influxdb.invalid\" && export INFLUXDB_PORT=\"80\" && export INGEST_PATH=\"js/integration/pp.csv\" && jest js/int --watchAll",
+    "int": "export INFLUXDB_HOST=\"influxdb.invalid\" && export INFLUXDB_PORT=\"80\" && export INGEST_PATH=\"js/integration/pp.csv\" && jest js/int",
     "influxtest":  "export INFLUXDB_HOST=\"influxdb.invalid\" && export INFLUXDB_PORT=\"80\" && export INGEST_PATH=\"js/integration/pp.csv\" &&npm run compile && node ./app/target/src/influxtest.js",
-    "unit": "jest js/unit --watchAll",
+    "unit": "jest js/unit",
     "test:watch": "jest --watchAll"
   },
   "author": "",
