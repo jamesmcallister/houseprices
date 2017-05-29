@@ -1,4 +1,4 @@
-import promiseDatabaseBuilder from '../src/influx/promiseDatabaseBuilder'
+import promiseDatabaseBuilder from '../../src/influx/promiseDatabaseBuilder'
 import sinon from 'sinon'
 describe('Promise Database', () => {
   const testDatabaseName = 'promiseDatabaseTest'

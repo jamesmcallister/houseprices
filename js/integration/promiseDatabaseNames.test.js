@@ -2,11 +2,11 @@ import {
   promiseDatabaseNames,
   promiseCreateDatabase,
   promiseDeleteDatabase
-} from '../src/influx/influxServices'
+} from '../app/services/influxServices'
 import logger from '../src/helpers/logger'
 
-import config from '../src/config/config.js'
-import { importFile } from '../src/csv/importServices'
+import config from '../app/config/config.js'
+import { importFile } from '../app/services/importServices'
 describe('Database Names', () => {
   it('Returns a list that does not include a deleted name and includes a name when created', () => {
     return (

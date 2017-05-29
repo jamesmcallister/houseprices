@@ -1,6 +1,5 @@
-import importFileBuilder from '../src/csv/importFileBuilder.js'
+import importFileBuilder from '../../src/csv/importFileBuilder.js'
 import sinon, { spy } from 'sinon'
-import config from '../src/config/config.js'
 
 describe('Read file form disk', () => {
   it('can read csv file', () => {
@@ -15,10 +14,10 @@ describe('Read file form disk', () => {
     })
 
     return importFileBuilder(fakeFileImportClient)(fakeOptions)(
-      config.importDataPath
+      "testpath"
     ).then(() => {
       expect(fakeFileImportFucntion.called).toBe(true)
-      expect(fakeFileImportFucntion.calledWith(config.importDataPath)).toBe(
+      expect(fakeFileImportFucntion.calledWith("testpath")).toBe(
         true
       )
     })

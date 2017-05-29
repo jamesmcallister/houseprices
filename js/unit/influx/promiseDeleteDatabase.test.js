@@ -1,5 +1,5 @@
 import promiseDeleteDatabaseBuilder
-  from '../src/influx/promiseDeleteDatabaseBuilder'
+  from '../../src/influx/promiseDeleteDatabaseBuilder'
 import sinon from 'sinon'
 describe('Promise Delete Database', () => {
   const testDatabaseName = 'promiseCreateDatabaseTest'

@@ -1,15 +1,15 @@
 import config from '../config/config'
-import influxClientBuilder from './influxClientBuilder'
-import promiseCreateDatabaseBuilder from './promiseCreateDatabaseBuilder'
-import promiseDatabaseBuilder from './promiseDatabaseBuilder'
-import promiseDatabaseNamesBuilder from './promiseDatabaseNamesBuilder'
-import promiseDeleteDatabaseBuilder from './promiseDeleteDatabaseBuilder'
-import promiseQueryBuilder from './promiseQueryBuilder'
-import promiseWriteBuilder from './promiseWriteBuilder'
+import influxClientBuilder from '../../src/influx/influxClientBuilder'
+import promiseCreateDatabaseBuilder from '../../src/influx/promiseCreateDatabaseBuilder'
+import promiseDatabaseBuilder from '../../src/influx/promiseDatabaseBuilder'
+import promiseDatabaseNamesBuilder from '../../src/influx/promiseDatabaseNamesBuilder'
+import promiseDeleteDatabaseBuilder from '../../src/influx/promiseDeleteDatabaseBuilder'
+import promiseQueryBuilder from '../../src/influx/promiseQueryBuilder'
+import promiseWriteBuilder from '../../src/influx/promiseWriteBuilder'
 
 const influxClientForDefaultDatabaseAndSchema = influxClientBuilder(
   config.influxDbHost
-)(config.databaseName)(config.schema)
+)(config.databaseName)(config.schema)(config.port)
 
 export const promiseCreateDatabase = () =>
   promiseCreateDatabaseBuilder(influxClientForDefaultDatabaseAndSchema)(

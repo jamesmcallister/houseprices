@@ -1,11 +1,11 @@
-import config from '../src/config/config.js'
+import config from '../app/config/config.js'
 import logger from '../src/helpers/logger'
 import {
   promiseWrite,
   promiseQuery,
   promiseDeleteDatabase,
   promiseDatabase
-} from '../src/influx/influxServices'
+} from '../app/services/influxServices'
 import { assert } from 'chai'
 
 describe('Database Write and Read', () => {
@@ -39,7 +39,7 @@ describe('Database Write and Read', () => {
         const { price, date, city, path, time } = response[0]
         const timeFromDataBase = Number(time.getNanoTime())
         const currentTimeLess60 = Date.now() * 1000000
-        const timeDiff = 60000000
+        const timeDiff = 60000000000
 
         expect(price).toBe(600)
         expect(date).toBe('2021')

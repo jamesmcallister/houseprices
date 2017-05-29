@@ -1,8 +1,8 @@
-import { importFile } from '../src/csv/importServices'
+import { importFile } from '../app/services/importServices'
 import logger from '../src/helpers/logger'
 import { tryCatch } from '../src/helpers/either'
 
-import config from '../src/config/config'
+import config from '../app/config/config'
 import {
   csvOptions,
   headerOptions,
