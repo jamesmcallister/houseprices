@@ -7,6 +7,8 @@ concourse:
   concourse:
     dockerRegistry: concourse-registry:5000
     insecureDockerRegistry: concourse-registry:5000
+  workers:
+    replicas: 1
   web:
     ingress:
       enabled: true
