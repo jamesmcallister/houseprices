@@ -8,8 +8,8 @@ resources:
 - name: git-pull-requests
   type: pull-request
   source:
-    access_token: {{github-access-token}}
-    private_key: {{github-private-key}}
+    access_token: {{github_access_token}}
+    private_key: {{private_key}}
     repo: jamesmcallister/uk-analytics
     url: "git@github.com:jamesmcallister/uk-analytics.git"
     every: true
@@ -18,7 +18,7 @@ resources:
   type: git
   source:
     uri: git@github.com:jamesmcallister/uk-analytics.git
-    branch: concourse
+    branch: jestconcourse
     private_key: {{private_key}}
   ignore_paths:
   - "docker"
@@ -26,8 +26,8 @@ resources:
 - name: worker-source-code
   type: git
   source:
-    uri: git@github.com:jamesmcallister/houseprices.git
-    branch: concourse
+    uri: git@github.com:jamesmcallister/uk-analytics.git
+    branch: jestconcourse
     private_key: {{private_key}}
   paths:
   - "docker/worker"
@@ -35,8 +35,8 @@ resources:
 - name: mc-source-code
   type: git
   source:
-    uri: git@github.com:jamesmcallister/houseprices.git
-    branch: concourse
+    uri: git@github.com:jamesmcallister/uk-analytics.git
+    branch: jestconcourse
     private_key: {{private_key}}
   paths:
   - "docker/mc"
@@ -81,7 +81,7 @@ jobs:
     config:
       platform: linux
       inputs:
-        - name: source-code
+        - name: git-pull-requests
         - name: npmcache-in
       outputs:
         - name: npmcache-out
@@ -91,7 +91,7 @@ jobs:
         - -exc
         - |
           . ~/.bashrc
-          pushd source-code
+          pushd git-pull-requests
             mkdir node_modules
             mkdir ~/.npm
             tar xzf ../npmcache-in/npmcache.tar.gz -C node_modules
@@ -104,12 +104,14 @@ jobs:
           popd
     on_success:
       put:  git-pull-requests
-      params: git-pull-requests
-      status: success
+      params:
+        path: git-pull-requests
+        status: success
     on_failure:
       put:  git-pull-requests
-      params: git-pull-requests
-      status: failure
+      params:
+        path: git-pull-requests
+        status: failure
 
 - name: nodejs-worker-build
   serial: true
