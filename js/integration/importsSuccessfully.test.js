@@ -68,9 +68,7 @@ describe('Imports successfully', () => {
       .then(() =>
         new Promise(resolve => importFile(csvOptions)(config.importDataPath).on('json', json => resolve(writeToInflux(json))))
       ).then(() => {
-        console.log("Read")
         return readFromInflux()}).then(data => {
-          console.log({data})
           return expect(data[0]).toEqual(expect.objectContaining(stringToUse))
         }
     )

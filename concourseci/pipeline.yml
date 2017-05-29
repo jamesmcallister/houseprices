@@ -55,14 +55,19 @@ resources:
     insecure_registries: ["concourse-registry:5000"]
 
 jobs:
-- name: pull-reqests
+- name: pull-requests
   serial: true
+  serial_groups: [integration]
   plan:
   - get:  git-pull-requests
     trigger: true
     version: every
   - get: mc
+    passed:
+     - minio-setup
   - get: pipeline-worker
+    passed:
+     - nodejs-worker-build
   - task: fetch-cache
     image: mc
     config:
@@ -115,6 +120,7 @@ jobs:
 
 - name: nodejs-worker-build
   serial: true
+  serial_groups: [docker]
   plan:
   - get: worker-source-code
 
@@ -125,6 +131,7 @@ jobs:
 
 - name: mc-worker-build
   serial: true
+  serial_groups: [docker]
   plan:
   - get: mc-source-code
     trigger: true
@@ -155,8 +162,11 @@ jobs:
           tar czf npmcache/npmcache.tar.gz -C test .
           tar czf npmcache/npm.tar.gz -C test .
           mc cp npmcache/* minio/npmcache/
+
+
 - name: npm test
   serial: true
+  serial_groups: [integration]
   plan:
   - get: pipeline-worker
     passed:
@@ -200,6 +210,8 @@ jobs:
             tar xzf ../npmcache-in/npmcache.tar.gz -C node_modules
             tar xzf ../npmcache-in/npm.tar.gz -C ~/.npm
             npm install -DE
+            npm run unit
+            npm run test
             tar czf ../npmcache-out/npmcache.tar.gz -C node_modules .
             tar czf ../npmcache-out/npm.tar.gz -C ~/.npm .
           popd
