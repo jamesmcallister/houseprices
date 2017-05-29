@@ -69,24 +69,51 @@ jobs:
     config:
       platform: linux
       run:
-        path: mc
+        path: sh
         args:
-        - ls
-        - minio
-
+        - -exc
+        - |
+          mc rm --force --recursive minio/npmcache || echo "didn't exist"
+          mc mb minio/npmcache
+          mkdir test
+          mkdir npmcache
+          echo test >> test/test
+          tar czf npmcache/npmcache.tar.gz -C test .
+          tar czf npmcache/npm.tar.gz -C test .
+          mc cp npmcache/* minio/npmcache/
 - name: npm test
+  serial: true
   plan:
   - get: pipeline-worker
     passed:
      - nodejs-worker-build
+  - get: mc
+    passed:
+     - minio-setup
   - get: source-code
     trigger: true
-  - task: say-hello
+  - task: fetch-cache
+    image: mc
+    config:
+      platform: linux
+      outputs:
+        - name: npmcache-in
+      run:
+        path: sh
+        args:
+        - -exc
+        - |
+          mc cp --recursive minio/npmcache fetched
+          mv fetched/npmcache/* npmcache-in
+  - task: npm-test
     image: pipeline-worker
     config:
       platform: linux
       inputs:
         - name: source-code
+        - name: npmcache-in
+      outputs:
+        - name: npmcache-out
       run:
         path: bash
         args:
@@ -94,8 +121,23 @@ jobs:
         - |
           . ~/.bashrc
           pushd source-code
+            mkdir node_modules
+            mkdir ~/.npm
+            tar xzf ../npmcache-in/npmcache.tar.gz -C node_modules
+            tar xzf ../npmcache-in/npm.tar.gz -C ~/.npm
             npm install -DE
-            ls ~/.nvm
-            ls ~node_modules
-
+            tar czf ../npmcache-out/npmcache.tar.gz -C node_modules .
+            tar czf ../npmcache-out/npm.tar.gz -C ~/.npm .
           popd
+  - task: npmcache-to-minio
+    image: mc
+    config:
+      platform: linux
+      inputs:
+        - name: npmcache-out
+      run:
+        path: sh
+        args:
+        - -exc
+        - |
+          mc cp npmcache-out/* minio/npmcache/
