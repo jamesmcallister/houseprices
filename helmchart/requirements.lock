@@ -1,0 +1,10 @@
+dependencies:
+- condition: ""
+  enabled: false
+  import-values: null
+  name: concourse
+  repository: https://kubernetes-charts.storage.googleapis.com
+  tags: null
+  version: 0.1.3
+digest: sha256:37c4777c0169c09d1789f215833f3e63b769909983e5d5a746c272ddbd590e31
+generated: 2017-05-26T19:02:52.693854684+01:00

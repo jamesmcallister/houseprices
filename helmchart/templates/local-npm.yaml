@@ -1,0 +1,13 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: {{ .Release.Name }}-local-npm-deployment
+  labels:
+    app: {{ .Release.Name }}-local-npm-deployment
+spec:
+  containers:
+    - name: local-npm
+      image: orlandohohmeier/local-npm:latest
+      ports:
+        - containerPort: 5080
