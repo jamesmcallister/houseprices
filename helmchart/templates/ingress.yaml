@@ -4,7 +4,7 @@ metadata:
   name: ingress
   annotations:
     ingress.kubernetes.io/rewrite-target: /
-    ingress.kubernetes.io/proxy-body-size: 2000m
+    ingress.kubernetes.io/proxy-body-size: 500m
 spec:
   rules:
   - host: registry.invalid
