@@ -1,14 +1,29 @@
 PROJECT = "UK Analytics"
 
-setup: ;@echo "Setup Minikube and init Helm - ${PROJECT}"; \
-		minikube start --memory 8192 --disk-size 40g && helm init
+start: ;@echo "Start Minikube - ${PROJECT}"; \
+		minikube start --memory 8192 --disk-size 40g; \
+		helm init
+
+stop: ;@echo "Stop Minikube - ${PROJECT}";\
+		minikube stop
 
 helminstall: ;@echo "Helm install - ${PROJECT}"; \
-	helm install ./helmchart -n uk-analytics && helm dependency update
+	cd ./helmchart helm dependency update; \
+	helm install ./helmchart -n uk-analytics
+
+helmdependency: ;\
+ cd ./helmchart; \
+ helm dependency update
 
 destroy: ;@echo "Destroying - ${PROJECT}"; \
 	helm delete --purge uk-analytics
 
 dashboard: ;@echo "Open minikube dashboard - ${PROJECT}"; \
 	minikube dashboard
+
+fly-login: ;@echo "Login to fly";\
+	fly -t ci login -c http://concourse.invalid -u concourse -p concourse
+
+fly: ;@echo "Fly will run concourseci/pipeline.yml";\
+	fly -t ci set-pipeline -p test -c concourseci/pipeline.yml --load-vars-from ~/credentials.yml
 
