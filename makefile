@@ -7,10 +7,6 @@ start: ;@echo "Start Minikube - ${PROJECT}"; \
 stop: ;@echo "Stop Minikube - ${PROJECT}";\
 		minikube stop
 
-helminstall: ;@echo "Helm install - ${PROJECT}"; \
-	cd ./helmchart helm dependency update; \
-	helm install ./helmchart -n uk-analytics
-
 helmdependency: ;\
  cd ./helmchart; \
  helm dependency update
@@ -27,3 +23,10 @@ fly-login: ;@echo "Login to fly";\
 fly: ;@echo "Fly will run concourseci/pipeline.yml";\
 	fly -t ci set-pipeline -p test -c concourseci/pipeline.yml --load-vars-from ~/credentials.yml
 
+setup: ;@echo "setup for first use";\
+		minikube start --memory 8192 --disk-size 40g; \
+		helm init; \ 
+		helm install ./helmchart -n uk-analytics
+
+flydestroy: ;@echo "Fly destroy pipeline test";\
+		fly -t ci destroy-pipeline --pipeline test
