@@ -7,10 +7,12 @@ concourse:
   concourse:
     dockerRegistry: concourse-registry:5000
     insecureDockerRegistry: concourse-registry:5000
-  workers:
+  worker:
     replicas: 1
+    resources:
+      requests:
+        memory: "1024Mi"
   web:
-    ingress:
-      enabled: true
-      hosts:
-      - "concourse-web"
+    resources:
+      requests:
+        memory: "256Mi"
