@@ -3,7 +3,6 @@ dockerInfluxDbDns: influxdb-host
 dockerMinioDns: minio
 dockerLocalNpmDns: local-npm
 concourse:
-  imageTag: 2.7.7
   concourse:
     dockerRegistry: concourse-registry:5000
     insecureDockerRegistry: concourse-registry:5000
@@ -12,7 +11,11 @@ concourse:
     resources:
       requests:
         memory: "1024Mi"
+  persistence:
+    worker:
+      size: 20Gi 
+
   web:
     resources:
       requests:
-        memory: "256Mi"
+        memory: "512Mi"
