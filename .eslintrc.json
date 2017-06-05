@@ -12,6 +12,15 @@
     }
   },
   "rules": {
+    "curly": "error",
+    "no-inner-declarations": "off",
+    "no-var": "error",
+    "prefer-arrow-callback": "error",
+    "prefer-const": "error",
+    "strict": "error",
+    "no-console": [
+      "error"
+    ],
     "prettier/prettier": [
       "error",
       {

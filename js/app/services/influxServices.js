@@ -1,9 +1,12 @@
 import config from '../config/config'
 import influxClientBuilder from '../../src/influx/influxClientBuilder'
-import promiseCreateDatabaseBuilder from '../../src/influx/promiseCreateDatabaseBuilder'
+import promiseCreateDatabaseBuilder
+  from '../../src/influx/promiseCreateDatabaseBuilder'
 import promiseDatabaseBuilder from '../../src/influx/promiseDatabaseBuilder'
-import promiseDatabaseNamesBuilder from '../../src/influx/promiseDatabaseNamesBuilder'
-import promiseDeleteDatabaseBuilder from '../../src/influx/promiseDeleteDatabaseBuilder'
+import promiseDatabaseNamesBuilder
+  from '../../src/influx/promiseDatabaseNamesBuilder'
+import promiseDeleteDatabaseBuilder
+  from '../../src/influx/promiseDeleteDatabaseBuilder'
 import promiseQueryBuilder from '../../src/influx/promiseQueryBuilder'
 import promiseWriteBuilder from '../../src/influx/promiseWriteBuilder'
 

@@ -9,7 +9,7 @@
     ]
   },
   "scripts": {
-    "format": "prettier-eslint --write \"app/**/*.js\"",
+    "lint": "prettier-eslint --write \"js/**/*.js\" && eslint \"js/**/*.js\"",
     "yarn": "yarn",
     "clean": "rimraf app/target",
     "shell": "docker exec -ti influxdb bash",
@@ -23,8 +23,9 @@
     "ingest": "npm run compile && node ./app/target/src/ingest.js",
     "int": "export INFLUXDB_HOST=\"influxdb-host\" && export INFLUXDB_PORT=\"8086\" && export INGEST_PATH=\"js/integration/pp.csv\" && jest js/int",
     "int:mark": "export INFLUXDB_HOST=\"influxdb.invalid\" && export INFLUXDB_PORT=\"80\" && export INGEST_PATH=\"js/integration/pp.csv\" && jest js/int",
+    "int:james": "export INFLUXDB_HOST=\"172.17.0.2\" && export INFLUXDB_PORT=\"8086\" && export INGEST_PATH=\"js/integration/pp.csv\" && jest js/int",
     "unit": "jest js/unit",
-    "test:watch": "jest --watchAll"
+    "test:watch": "export INFLUXDB_HOST=\"172.17.0.2\" export INFLUXDB_PORT=\"8086\" && export INGEST_PATH=\"js/integration/pp.csv\" && jest --watchAll"
   },
   "author": "",
   "license": "UNLINCED",
