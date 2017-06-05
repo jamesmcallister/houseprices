@@ -6,7 +6,7 @@ describe('Promise Read Database', () => {
   it('Calls the influx with fake query', () => {
     const fakeQuery = `
       select * from response_times_2
-      where host = ${escape.stringLit("test")}
+      where host = ${escape.stringLit('test')}
       order by time desc
       limit`
 

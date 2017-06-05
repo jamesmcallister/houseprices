@@ -1,10 +1,12 @@
 import fs from 'fs'
-import config from "../app/config/config"
+import config from '../app/config/config'
 const existsSync = filePath => {
   try {
     fs.statSync(filePath)
   } catch (err) {
-    if (err.code == 'ENOENT') return false
+    if (err.code == 'ENOENT') {
+      return false
+    }
   }
   return true
 }

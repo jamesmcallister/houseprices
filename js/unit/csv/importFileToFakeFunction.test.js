@@ -14,12 +14,10 @@ describe('Read file form disk', () => {
     })
 
     return importFileBuilder(fakeFileImportClient)(fakeOptions)(
-      "testpath"
+      'testpath'
     ).then(() => {
       expect(fakeFileImportFucntion.called).toBe(true)
-      expect(fakeFileImportFucntion.calledWith("testpath")).toBe(
-        true
-      )
+      expect(fakeFileImportFucntion.calledWith('testpath')).toBe(true)
     })
   })
 })

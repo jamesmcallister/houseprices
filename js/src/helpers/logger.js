@@ -3,26 +3,26 @@ winston.level = 'debug'
 
 const location = `/var/houseprices`
 
-let logger = new winston.Logger({
+const logger = new winston.Logger({
   transports: [
     new winston.transports.Console({
       colorize: true,
       level: 'debug'
-    // }),
-    // new winston.transports.File({
-    //   name: 'info-file',
-    //   filename: `${location}/filelog-info.log`,
-    //   level: 'info'
-    // }),
-    // new winston.transports.File({
-    //   name: 'error-file',
-    //   filename: `${location}/filelog-error.log`,
-    //   level: 'error'
-    // }),
-    // new winston.transports.File({
-    //   name: 'warn-file',
-    //   filename: `${location}/filelog-warn.log`,
-    //   level: 'warn'
+      // }),
+      // new winston.transports.File({
+      //   name: 'info-file',
+      //   filename: `${location}/filelog-info.log`,
+      //   level: 'info'
+      // }),
+      // new winston.transports.File({
+      //   name: 'error-file',
+      //   filename: `${location}/filelog-error.log`,
+      //   level: 'error'
+      // }),
+      // new winston.transports.File({
+      //   name: 'warn-file',
+      //   filename: `${location}/filelog-warn.log`,
+      //   level: 'warn'
     })
   ]
 })
