@@ -9,7 +9,7 @@
     ]
   },
   "scripts": {
-    "format": "prettier-eslint --write \"js/**/*.js\"",
+    "lint": "prettier-eslint --write \"js/**/*.js\" && eslint \"js/**/*.js\"",
     "yarn": "yarn",
     "clean": "rimraf app/target",
     "shell": "docker exec -ti influxdb bash",
