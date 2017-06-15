@@ -45,3 +45,6 @@ target
 *.retry
 .vscode
 /helmchart/**/*.tgz
+yarn.lock
+output
+testFile.json
