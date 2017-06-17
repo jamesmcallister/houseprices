@@ -28,9 +28,9 @@
     "test:watch": "export INFLUXDB_HOST=\"172.17.0.2\" export INFLUXDB_PORT=\"8086\" && export INGEST_PATH=\"js/integration/pp.csv\" && jest --watchAll"
   },
   "author": "",
-  "license": "UNLINCED",
+  "license": "UNLICENSED",
   "devDependencies": {
-    "@types/jest": "^19.2.3",
+    "@types/jest": "19.2.3",
     "babel-cli": "6.24.1",
     "babel-eslint": "7.2.3",
     "babel-preset-es2015": "6.24.1",
