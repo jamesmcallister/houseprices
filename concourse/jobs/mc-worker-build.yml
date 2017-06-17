@@ -1,0 +1,9 @@
+name: mc-worker-build
+serial: true
+serial_groups: [docker]
+plan:
+- get: mc-source-code
+  trigger: true
+- put: mc
+  params:
+    build: mc-source-code/docker/mc

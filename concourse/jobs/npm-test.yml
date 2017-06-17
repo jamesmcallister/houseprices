@@ -1,0 +1,15 @@
+name: npm test
+serial: true
+serial_groups: [integration]
+plan:
+- get: pipeline-worker
+  passed:
+   - nodejs-worker-build
+- get: mc
+  passed:
+   - minio-setup
+- get: source-code
+  trigger: true
+- task: fetch-node-cache
+- task: npm-test
+- task: npmcache-to-minio

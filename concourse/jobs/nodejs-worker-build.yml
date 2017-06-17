@@ -1,0 +1,9 @@
+name: nodejs-worker-build
+serial: true
+serial_groups: [docker]
+plan:
+- get: worker-source-code
+  trigger: true
+- put: pipeline-worker
+  params:
+    build: worker-source-code/docker/worker
