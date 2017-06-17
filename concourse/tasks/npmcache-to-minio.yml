@@ -1,0 +1,12 @@
+task: npmcache-to-minio
+image: mc
+config:
+  platform: linux
+  inputs:
+    - name: npmcache-out
+  run:
+    path: sh
+    args:
+    - -exc
+    - |
+      mc cp npmcache-out/* minio/npmcache/

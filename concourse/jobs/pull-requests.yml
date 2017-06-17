@@ -1,0 +1,15 @@
+name: pull-requests
+serial: true
+serial_groups: [integration]
+plan:
+- get:  git-pull-requests
+  trigger: true
+  version: every
+- get: mc
+  passed:
+   - minio-setup
+- get: pipeline-worker
+  passed:
+   - nodejs-worker-build
+- task: fetch-node-cache
+- task: npm-test

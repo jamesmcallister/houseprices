@@ -1,0 +1,8 @@
+name: git-pull-requests
+type: pull-request
+source:
+  access_token: f748c35e-5370-11e7-8f0a-080027ad35e6
+  private_key: dcc82a2e-5370-11e7-a183-080027ad35e6
+  repo: jamesmcallister/uk-analytics
+  url: "git@github.com:jamesmcallister/uk-analytics.git"
+  every: true
