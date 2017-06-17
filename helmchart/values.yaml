@@ -1,7 +1,6 @@
 dockerRegistryDns: concourse-registry
 dockerInfluxDbDns: influxdb-host
 dockerMinioDns: minio
-dockerLocalNpmDns: local-npm
 concourse:
   concourse:
     dockerRegistry: concourse-registry:5000
@@ -10,12 +9,8 @@ concourse:
     replicas: 1
     resources:
       requests:
-        memory: "1024Mi"
-  persistence:
-    worker:
-      size: 20Gi 
-
+        memory: "512Mi"
   web:
     resources:
       requests:
-        memory: "512Mi"
+        memory: "256Mi"

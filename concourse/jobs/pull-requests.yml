@@ -12,4 +12,4 @@ plan:
   passed:
    - nodejs-worker-build
 - task: fetch-node-cache
-- task: npm-test
+- task: pull-request

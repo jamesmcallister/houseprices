@@ -1,4 +1,4 @@
-task: say-hello
+task: minio-setup
 image: mc
 config:
   platform: linux
