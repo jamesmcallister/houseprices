@@ -1,4 +1,4 @@
-task: npm-test
+task: pull-request
 image: pipeline-worker
 config:
   platform: linux

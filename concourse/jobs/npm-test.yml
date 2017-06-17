@@ -11,5 +11,5 @@ plan:
 - get: source-code
   trigger: true
 - task: fetch-node-cache
-- task: npm-test
+- task: master
 - task: npmcache-to-minio

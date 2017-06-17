@@ -4,4 +4,4 @@ plan:
   passed:
   - mc-worker-build
   trigger: true
-- task: say-hello
+- task: minio-setup
