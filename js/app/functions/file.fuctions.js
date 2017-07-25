@@ -1,5 +1,5 @@
 import logger from '../../src/helpers/logger'
-import { writeFile, unlink, existsSync } from 'fs'
+import { writeFile, unlink, existsSync, createWriteStream } from 'fs'
 
 export const deleteFile = fileName => {
   new Promise((resolve, reject) => {
@@ -13,7 +13,7 @@ export const isFileThere = fileName =>
   existsSync(fileName) ? deleteFile(fileName) : false
 
 export const saveToFile = fileName => result => {
-  writeFile(fileName, JSON.stringify(result), 'utf8', () =>
+  createWriteStream(fileName, JSON.stringify(result), 'utf8', () =>
     logger.info('Saving File', fileName)
   )
 }

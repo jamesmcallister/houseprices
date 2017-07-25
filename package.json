@@ -26,7 +26,8 @@
     "int:james": "export INFLUXDB_HOST=\"172.17.0.2\" && export INFLUXDB_PORT=\"8086\" && export INGEST_PATH=\"js/integration/pp.csv\" && jest js/int",
     "unit": "jest js/unit",
     "test:watch": "export INFLUXDB_HOST=\"172.17.0.2\" export INFLUXDB_PORT=\"8086\" && export INGEST_PATH=\"js/integration/pp.csv\" && jest --watchAll",
-    "job:list": "export INFLUXDB_HOST=\"172.17.0.2\" && export INFLUXDB_PORT=\"8086\" && babel-node ./js/app/job.list/index.js"
+    "job:list": "export INFLUXDB_HOST=\"172.17.0.2\" && export INFLUXDB_PORT=\"8086\" && export INGEST_PATH=\"js/integration/pp.csv\" && babel-node ./js/app/job.list/index.js",
+    "rxjs": "export INFLUXDB_HOST=\"172.17.0.2\" && export INFLUXDB_PORT=\"8086\" && export INGEST_PATH=\"js/integration/pp.csv\" && babel-node ./js/app/observale"
   },
   "author": "",
   "license": "UNLINCED",
@@ -53,5 +54,13 @@
     "watch-run": "1.2.5",
     "winston": "2.3.1",
     "yarn": "0.23.4"
+  },
+  "dependencies": {
+    "csv-parse": "^1.2.0",
+    "highland": "^2.10.5",
+    "lorem-ipsum": "^1.0.4",
+    "rx-from-csv": "^0.1.3",
+    "rxjs": "^5.4.1",
+    "rxjs-stream": "^1.0.4"
   }
 }
