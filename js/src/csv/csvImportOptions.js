@@ -28,4 +28,6 @@ export const csvOptions = {
   includeColumns: includedColumns,
   ignoreColumn: ingnoreColumns,
   checkType: true
+  // objectMode: true // add for 'data'
+  // workerNum: 4
 }

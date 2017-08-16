@@ -1,0 +1,29 @@
+dependencies:
+  axios: 0.16.2
+packages:
+  /axios/0.16.2:
+    dependencies:
+      follow-redirects: 1.2.4
+      is-buffer: 1.1.5
+    resolution:
+      integrity: sha1-uk+S8XFn37q0CYN4VFS5rBScPG0=
+  /debug/2.6.8:
+    dependencies:
+      ms: 2.0.0
+    resolution:
+      integrity: sha1-5zFTHKLt4n0YgiJCfaF4IdaP9Pw=
+  /follow-redirects/1.2.4:
+    dependencies:
+      debug: 2.6.8
+    resolution:
+      integrity: sha512-Suw6KewLV2hReSyEOeql+UUkBVyiBm3ok1VPrVFRZnQInWpdoZbbiG5i8aJVSjTr0yQ4Ava0Sh6/joCg1Brdqw==
+  /is-buffer/1.1.5:
+    resolution:
+      integrity: sha1-Hzsm72E7IUuIy8ojzGwB2Hlh7sw=
+  /ms/2.0.0:
+    resolution:
+      integrity: sha1-VgiurfwAvmwpAd9fmGF4jeDVl8g=
+registry: 'https://registry.npmjs.org/'
+shrinkwrapVersion: 3
+specifiers:
+  axios: 0.16.2

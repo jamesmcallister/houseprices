@@ -1,73 +1,37 @@
-import { importStream } from '../../app/services/importServices'
-import logger from '../../src/helpers/logger'
-import config from '../../app/config/config'
 import {
-  csvOptions,
-  headerOptions,
-  ingnoreColumns,
-  includedColumns
-} from '../../src/csv/csvImportOptions'
+  importStream,
+  importFile,
+  importString
+} from '../../app/services/importServices'
+import { csvOptions } from '../../src/csv/csvImportOptions'
 import {
   promiseDeleteDatabase,
-  promiseCreateDatabase,
-  promiseWrite,
-  promiseQuery
+  promiseCreateDatabase
 } from '../../app/services/influxServices'
-
-import saveToFile from '../functions/file.fuctions'
-import { getMaxPrice, getTotalPrice } from '../functions/math.fuctions'
-
-import { Observable } from 'rxjs'
+import { writeToInflux, printShitOut, readFromInflux } from './functions'
+import { createReadStream } from 'fs'
+import { listOfQuerys } from './listOfQuerys'
+import Rx, { Observable } from 'rxjs'
 import 'rx-from-csv'
+import csvparse from 'csv-parse'
+import logger from '../../src/helpers/logger'
 
-const fileToImport = __dirname + '/pp-2017.csv'
+const fileLoaction = __dirname + '/pp.csv'
+const fileStreamLoaction = createReadStream(__dirname + '/pp.csv', 'utf-8')
 
-const fileToStream = () => {
-  Observable.fromCSV(fileToImport).subscribe
-}
+export default () => {}
 
-const fileName = jobName => `./output/___${jobName}.json`
+promiseDeleteDatabase()
+promiseCreateDatabase()
 
-const printShitOut = result => {
-  // logger.warn(result)
-  logger.warn(JSON.stringify(formatOutputOfResult(result), 2, 2))
-}
+const csvread = () =>
+  importStream(csvOptions)(fileStreamLoaction).on('json', x => x)
 
-const formatOutputOfResult = result => {
-  return result
-}
+const buffer = Observable.of(csvread()).bufferCount(10, 2)
 
-const writeToInflux = ({ price, date, postcode, city, county }) => {
-  return promiseWrite([
-    {
-      measurement: 'max',
-      fields: {
-        price: price,
-        date: date,
-        postcode: postcode,
-        city: city,
-        county: county
-      }
-    }
-  ]).catch(err => logger.error('writeToInflux()', err))
-}
+buffer.subscribe(x => writeToInflux(x).catch(err => logger.eroor(err)))
+// console.log(csvread())
 
-const readFromInflux = jobQuery => {
-  return promiseQuery(jobQuery).catch(err =>
-    logger.error('readFromInflux()', err)
-  )
-}
+// const numbers = Observable.interval(1000).bufferCount(2, 1)
 
-export default async jobQuery => {
-  await promiseDeleteDatabase()
-  await promiseCreateDatabase()
-  await importStream(csvOptions)(fileToStream)
-    .on('json', result => writeToInflux(result))
-    .on('error', err => logger.error('writeToInflux()', err))
-  await jobQuery.map(job =>
-    readFromInflux(job.query).then(result => {
-      saveToFile(fileName(job.name))(formatOutputOfResult(result))
-      printShitOut(result)
-    })
-  )
-}
+// numbers.subscribe(x => console.log(x))

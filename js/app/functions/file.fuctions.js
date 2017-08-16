@@ -1,21 +1,25 @@
 import logger from '../../src/helpers/logger'
-import { writeFile, unlink, existsSync, createWriteStream } from 'fs'
+import { unlink, existsSync, createWriteStream } from 'fs'
 
-export const deleteFile = fileName => {
+const deleteFile = fileName => {
   new Promise((resolve, reject) => {
     unlink(fileName, error => {
-      error ? logger.info('no file') : resolve()
+      error ? logger.info('no file' + reject) : resolve()
     })
   })
 }
 
-export const isFileThere = fileName =>
+const isFileThere = fileName =>
   existsSync(fileName) ? deleteFile(fileName) : false
 
-export const saveToFile = fileName => result => {
-  createWriteStream(fileName, JSON.stringify(result), 'utf8', () =>
-    logger.info('Saving File', fileName)
-  )
+const saveToFile = fileName => result => {
+  createWriteStream(fileName)
+    .write(result)
+    .on('error', err => logger.info(err))
+    .on('end', () => {
+      stream.end()
+    })
+  logger.info('Saving File', fileName)
 }
 
 export default fileName => result => {

@@ -1,4 +1,5 @@
 import config from '../config/config'
+import logger from '../../src/helpers/logger'
 import influxClientBuilder from '../../src/influx/influxClientBuilder'
 import promiseCreateDatabaseBuilder
   from '../../src/influx/promiseCreateDatabaseBuilder'
@@ -14,10 +15,12 @@ const influxClientForDefaultDatabaseAndSchema = influxClientBuilder(
   config.influxDbHost
 )(config.databaseName)(config.schema)(config.port)
 
-export const promiseCreateDatabase = () =>
+export const promiseCreateDatabase = () => {
+  logger.info('promiseCreateDatabase()')
   promiseCreateDatabaseBuilder(influxClientForDefaultDatabaseAndSchema)(
     config.databaseName
   )
+}
 
 export const promiseDatabaseNames = () =>
   promiseDatabaseNamesBuilder(influxClientForDefaultDatabaseAndSchema)
@@ -27,14 +30,17 @@ export const promiseDatabase = () =>
     config.databaseName
   )
 
-export const promiseDeleteDatabase = () =>
+export const promiseDeleteDatabase = () => {
+  logger.info('promiseDeleteDatabase()')
   promiseDeleteDatabaseBuilder(influxClientForDefaultDatabaseAndSchema)(
     config.databaseName
   )
+}
 
 export const promiseQuery = query =>
   promiseQueryBuilder(influxClientForDefaultDatabaseAndSchema)(query)
 
-// added this, as it was missing
-export const promiseWrite = writePoints =>
+export const promiseWrite = writePoints => {
+  logger.info('promiseWrite()')
   promiseWriteBuilder(influxClientForDefaultDatabaseAndSchema)(writePoints)
+}
