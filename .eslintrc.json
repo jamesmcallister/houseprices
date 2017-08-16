@@ -13,8 +13,10 @@
   },
   "rules": {
     "curly": "error",
+    "no-undefined": "error",
     "no-inner-declarations": "off",
     "no-var": "error",
+    "no-unused-vars": "warn",
     "prefer-arrow-callback": "error",
     "prefer-const": "error",
     "strict": "error",
