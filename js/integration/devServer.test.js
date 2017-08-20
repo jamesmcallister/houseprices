@@ -1,5 +1,5 @@
 import fs from 'fs'
-import config from "../app/config/config"
+import config from '../app/config/config'
 const existsSync = filePath => {
   try {
     fs.statSync(filePath)

@@ -32,6 +32,5 @@ export const promiseDeleteDatabase = () =>
 export const promiseQuery = query =>
   promiseQueryBuilder(influxClientForDefaultDatabaseAndSchema)(query)
 
-// added this, as it was missing
 export const promiseWrite = writePoints =>
   promiseWriteBuilder(influxClientForDefaultDatabaseAndSchema)(writePoints)
