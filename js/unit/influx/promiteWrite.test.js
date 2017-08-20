@@ -19,6 +19,7 @@ describe('Promise Write Database', () => {
     return promiseWriteDataBuilder(fakeWritePoint)(
       fakeWritePointData
     ).then(() => {
+      return
       expect(fakeGetDatabaseClient.called).toBe(true)
       expect(fakeGetDatabaseClient.calledWith(fakeWritePointData)).toBe(true)
     })

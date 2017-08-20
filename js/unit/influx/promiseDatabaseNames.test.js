@@ -1,5 +1,4 @@
-import promiseDatabaseNamesBuilder
-  from '../../src/influx/promiseDatabaseNamesBuilder'
+import promiseDatabaseNamesBuilder from '../../src/influx/promiseDatabaseNamesBuilder'
 
 import sinon from 'sinon'
 describe('Promise Database Names', () => {
@@ -9,8 +8,8 @@ describe('Promise Database Names', () => {
     const fakeInfluxClient = {
       getDatabaseNames: fakeGetDatabaseNames
     }
-    return promiseDatabaseNamesBuilder(fakeInfluxClient).then(() => {
+    return promiseDatabaseNamesBuilder(fakeInfluxClient).then(() =>
       expect(fakeGetDatabaseNames.called).toBe(true)
-    })
+    )
   })
 })

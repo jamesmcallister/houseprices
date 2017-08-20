@@ -1,5 +1,4 @@
-import promiseCreateDatabaseBuilder
-  from '../../src/influx/promiseCreateDatabaseBuilder'
+import promiseCreateDatabaseBuilder from '../../src/influx/promiseCreateDatabaseBuilder'
 import sinon from 'sinon'
 describe('Promise Create Database', () => {
   const testDatabaseName = 'promiseCreateDatabaseTest'
@@ -11,6 +10,7 @@ describe('Promise Create Database', () => {
     return promiseCreateDatabaseBuilder(fakeInfluxClient)(
       testDatabaseName
     ).then(() => {
+      return
       expect(fakeCreateDatabase.called).toBe(true)
       expect(fakeCreateDatabase.calledWith(testDatabaseName)).toBe(true)
     })

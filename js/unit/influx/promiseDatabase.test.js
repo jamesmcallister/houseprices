@@ -8,6 +8,7 @@ describe('Promise Database', () => {
     return promiseDatabaseBuilder(fakePromiseDatabaseNames)(
       fakePromiseCreateDatabase
     )(testDatabaseName).then(() => {
+      return
       expect(fakePromiseCreateDatabase.called).toBe(true)
       expect(fakePromiseCreateDatabase.calledWith(testDatabaseName)).toBe(true)
       expect(fakePromiseDatabaseNames.called).toBe(true)
@@ -21,6 +22,7 @@ describe('Promise Database', () => {
     return promiseDatabaseBuilder(fakePromiseDatabaseNames)(
       fakePromiseCreateDatabase
     )(testDatabaseName).then(() => {
+      return
       expect(fakePromiseCreateDatabase.called).toBe(false)
       expect(fakePromiseDatabaseNames.called).toBe(true)
     })

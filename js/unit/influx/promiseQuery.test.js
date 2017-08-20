@@ -6,7 +6,7 @@ describe('Promise Read Database', () => {
   it('Calls the influx with fake query', () => {
     const fakeQuery = `
       select * from response_times_2
-      where host = ${escape.stringLit("test")}
+      where host = ${escape.stringLit('test')}
       order by time desc
       limit`
 
@@ -16,8 +16,8 @@ describe('Promise Read Database', () => {
     const fakeInfluxClient = {
       query: fakeGetDatabaseClient
     }
-    return promiseQueryBuilder(fakeInfluxClient)(fakeQuery).then(() => {
+    return promiseQueryBuilder(fakeInfluxClient)(fakeQuery).then(() =>
       expect(fakeGetDatabaseClient.called).toBe(true)
-    })
+    )
   })
 })
