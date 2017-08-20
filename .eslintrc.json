@@ -1,17 +1,17 @@
 {
   "parser": "babel-eslint",
   "plugins": [
+    "promise",
     "prettier"
-  ],
-  "presets": [
-    "es2015"
   ],
   "parserOptions": {
     "ecmaFeatures": {
       "modules": true
     }
   },
+  "extends": "plugin:promise/recommended",
   "rules": {
+    "promise/avoid-new": "off",
     "prettier/prettier": [
       "error",
       {
