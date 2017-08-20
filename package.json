@@ -10,7 +10,6 @@
   },
   "scripts": {
     "format": "prettier-eslint --write \"app/**/*.js\"",
-    "yarn": "yarn",
     "clean": "rimraf app/target",
     "shell": "docker exec -ti influxdb bash",
     "start": "docker-compose up --build --remove-orphans",
@@ -47,7 +46,6 @@
     "rimraf": "2.6.1",
     "sinon": "2.2.0",
     "watch-run": "1.2.5",
-    "winston": "2.3.1",
-    "yarn": "0.23.4"
+    "winston": "2.3.1"
   }
 }
